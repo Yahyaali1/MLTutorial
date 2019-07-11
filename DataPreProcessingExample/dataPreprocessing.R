@@ -13,3 +13,7 @@ dataset$Salary = ifelse(is.na(dataset$Salary),ave(dataset$Age, FUN = function(x)
 
 dataset$Country = factor(dataset$Country, levels= c('France','Germany','Spain'),
                          labels = c(1,2,3))
+
+
+dataset$Purchased = factor(dataset$Purchased, levels= c('Yes','No'),
+                         labels = c(1,0))
