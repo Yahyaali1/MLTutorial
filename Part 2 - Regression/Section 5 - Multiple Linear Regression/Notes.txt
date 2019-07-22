@@ -1,0 +1,43 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Jul 18 08:38:51 2019
+
+@author: Yahya
+"""
+
+#Notes: Linear Regressions works under certain conditions 
+#-Linearity 
+#-Homoscedasticity: Variation of the observeration around regressiong line is
+#constant 
+#-Multivariate normality 
+#-Independence of errors 
+#-Lack of multicollinearity 
+#-Erros for X,Y are normally distributed 
+
+# Notes: How to select variables that matter ? 
+#1- All in : Might not work well as you are not aware which ones actually
+# contribute to your model 
+#2- Backward & forward elimination/Stepwise 
+#Backward 
+#	Fit model with significance value of 0.05
+#	Fit the model with possible predictors 
+#	Remove the variable with highest P value. Why: because 
+# 	Fit the model again. Unless you have all the variables have P value < SL 
+
+#Forward
+#	Form ALL models for y = Xn. Means we have models predicting y for X1,X2...Xn.
+#	Select the one with lowest P Value. 
+#	Form all models with 2 variables now. Keeping the one that was added earlier. 
+#	Finish when p< SL is false, and keep the last model. 
+
+#Bidirectional 
+#	Forward step to add new variable 
+#	Backward to remove all those that have P< Sl 
+# 	Iterate until you have no variable being added or removed. 
+
+#All possible Models 
+#	For example 2^n -1 for n columns. 
+#	Define a criteria to select 
+#	Select the one.
+# Importing the dataset
+
