@@ -1,0 +1,6 @@
+R2 intuition 
+- Formula for R^2 = 1 - (Sum of squared error for each value from each origional value)/(Sum of square distance from mean value)
+if the values of R^2 is greater means it is better. since the R residuals is small
+
+Problem with R^2. 
+- If we increase the number of variables. The value of r square will increase
