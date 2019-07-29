@@ -1,0 +1,6 @@
+#Notes
+-Random Forest intuition
+- It is like forming N decision trees using a k sample points 
+- Using N decisions trees to predict a value
+- Taking average of the predicted values to achieve the final results 
+It is one of ensemble techniques
