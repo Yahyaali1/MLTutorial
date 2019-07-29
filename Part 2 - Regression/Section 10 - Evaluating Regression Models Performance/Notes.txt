@@ -3,4 +3,11 @@ R2 intuition
 if the values of R^2 is greater means it is better. since the R residuals is small
 
 Problem with R^2. 
-- If we increase the number of variables. The value of r square will increase
+- If we increase the number of variables. The value of r square will always increase. As there would always be some co releation between
+  variables
+
+Adjusted R square 
+
+R^2 = 1 - (1-R^2) * n-1 / n-p-1. n = sample size. p is the number of regressor. 
+This will increase if there is some positive impact of the variable otherwise penalized. 
+For variables to have significant impact R^2 needs to increase significantly. 
