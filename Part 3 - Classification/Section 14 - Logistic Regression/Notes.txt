@@ -1,0 +1,10 @@
+Logistic Regression 
+-For problems such as classification. 
+-Example is a yes & no Question. 
+-Doesn't fit a linear model because it doesn't make sense 
+-It is more relevant if we can use probability to predict the result
+-Apply logistic regression function to linear function to achieve the final result
+-Basically, we are trying to find a line that best fits the data. And in this case
+-Logistic function fits best to a data that has yes/no answer.
+- A certain probability can be defined as well to classify the predicted value if it 
+- is a yes or no. For example if p >0.5 then it is yes otherwise it would be no
