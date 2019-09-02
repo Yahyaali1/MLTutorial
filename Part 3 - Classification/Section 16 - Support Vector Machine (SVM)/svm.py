@@ -4,8 +4,20 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
+from pandas_ml import ConfusionMatrix
 
+def plotConfusionMatrix(confusionMatrix,x_labels):
+	ax = plt.subplot()
+	sns.heatmap(confusionMatrix, annot=True, ax = ax)
+	ax.set_xlabel('Predicted labels');ax.set_ylabel('True labels'); 
+	ax.set_title('Confusion Matrix'); 
+	ax.xaxis.set_ticklabels(x_labels);
+	ax.yaxis.set_ticklabels(x_labels[::-1])
 # Importing the dataset
+
+	
+	
 dataset = pd.read_csv('Social_Network_Ads.csv')
 X = dataset.iloc[:, [2, 3]].values
 y = dataset.iloc[:, 4].values
@@ -20,25 +32,37 @@ sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
-# Fitting K-NN to the Training set
-from sklearn.neighbors import KNeighborsClassifier
-#p is the parameter for the type of distance used for different calculation 
-#p=1 is manhattan distance 
-#p=2 is euclidean distance 
-#n_jobs parallel jobs 
-classifier = KNeighborsClassifier(n_neighbors = 15, metric = 'minkowski', p = 2, n_jobs = 50)
-classifier.fit(X_train, y_train)
+# Fitting SVM classifier on the data set
+from sklearn.svm import SVC
+#Using linear kernal 
+#Using linear kernal gives us linear or logistic results
+#Another approach is to use polynomial kernal and add respective degree
+#For linear case we can use degree=1 
+classifier_linear = SVC(kernel="poly",random_state=0,degree=1)
+
+classifier_linear.fit(X_train, y_train)
 
 # Predicting the Test set results
-y_pred = classifier.predict(X_test)
+y_pred = classifier_linear.predict(X_test)
 
-# Making the Confusion Matrix
-from sklearn.metrics import confusion_matrix
-cm = confusion_matrix(y_test, y_pred)
-cm
+
+cm_linear = ConfusionMatrix(y_test, y_pred)
+cm_linear
+
+#Changing the classifier to achieve better results
+classifier_rbf = SVC(kernel="rbf",random_state=0)
+classifier_rbf.fit(X_train, y_train)
+
+# Predicting the Test set results
+y_pred = classifier_rbf.predict(X_test)
+
+cm_pandas = ConfusionMatrix(y_test,y_pred)
+cm_pandas
+
 
 X_set = X_train
 y_set = y_train
+classifier=classifier_linear
 # Visualising the Training set results
 #Visualize the results using scatter plot 
 #Forming the under laying data
@@ -63,3 +87,6 @@ plt.scatter(X_set[:,0][y_set==0],X_set[:,1][y_set==0], marker = ".")
 plt.scatter(X_set[:,0][y_set==1],X_set[:,1][y_set==1], marker = "+")
 
 plt.show()
+
+
+	
