@@ -22,7 +22,11 @@ X_test = sc.transform(X_test)
 
 # Fitting K-NN to the Training set
 from sklearn.neighbors import KNeighborsClassifier
-classifier = KNeighborsClassifier(n_neighbors = 5, metric = 'minkowski', p = 2)
+#p is the parameter for the type of distance used for different calculation 
+#p=1 is manhattan distance 
+#p=2 is euclidean distance 
+#n_jobs parallel jobs 
+classifier = KNeighborsClassifier(n_neighbors = 15, metric = 'minkowski', p = 2, n_jobs = 50)
 classifier.fit(X_train, y_train)
 
 # Predicting the Test set results
@@ -31,8 +35,10 @@ y_pred = classifier.predict(X_test)
 # Making the Confusion Matrix
 from sklearn.metrics import confusion_matrix
 cm = confusion_matrix(y_test, y_pred)
+cm
 
 X_set = X_train
+y_set = y_train
 # Visualising the Training set results
 #Visualize the results using scatter plot 
 #Forming the under laying data
@@ -53,7 +59,7 @@ X2_false = X2.ravel()[y_pred_test==0]
 plt.scatter(X1_true,X2_true,c="green", alpha=0.1)
 plt.scatter(X1_false,X2_false,c="red", alpha=0.3)
 #PLotting true data values 
-plt.scatter(X_train[:,0][y_train==0],X_train[:,1][y_train==0], marker = ".")
-plt.scatter(X_train[:,0][y_train==1],X_train[:,1][y_train==1], marker = "+")
+plt.scatter(X_set[:,0][y_set==0],X_set[:,1][y_set==0], marker = ".")
+plt.scatter(X_set[:,0][y_set==1],X_set[:,1][y_set==1], marker = "+")
 
 plt.show()
