@@ -1,0 +1,27 @@
+Bayes Theorem 
+	-Basic Assumption that every feature in the data set is independent. 
+	With an example of defective parts.
+	P(A/B) = (P(B/A) * P(A) )/ P(B)
+	P(Defective/Mach2) = (P(Mach2/Defective)*P(Defective))/P(Mach2)
+	
+	Example:
+	Probability of a category/Given Features  = (Likelihood) * (Piror Probability)/
+												(Marginal Likelihood)
+											= P(Given Feature/Category) * P(Category)/
+												P(Features)
+	P(Marginal Likelihood) = Select Observation around new point
+					- So in statement it is "what is the likelihood" of picking up 
+						something that exhibits similar features as our new observation. 
+					- Highly depends on the radius. 
+					- 
+	P(Likelihood) = Given that out of all the things belonging to certain category,
+							 What is the probability that they will exhibit feature 
+							 similar to the selected points under Likelihood 
+	
+	How to work with more then 2 features ? 
+	What is P(X). Given that we add a new point in the dataset, what is the likelihood
+	that it would fall under the area we have selected? 
+	Note:
+		Given we are comparing two categories, we can ignore calculation for P(X) as 
+		it will be ignore anyway. 
+	
