@@ -1,4 +1,4 @@
-# Naive Bayes
+# Random Forest Classification
 
 # Importing the dataset
 dataset = read.csv('Social_Network_Ads.csv')
@@ -19,16 +19,15 @@ test_set = subset(dataset, split == FALSE)
 training_set[-3] = scale(training_set[-3])
 test_set[-3] = scale(test_set[-3])
 
-# Fitting SVM to the Training set
-# install.packages('e1071')
-library(e1071)
-# Predicting the Test set results
-#However the Navie base does not directly makes factor out of the dataset. 
-# We need to factor the data firt before placing it in the classifier. Otherwise it gives 
-# factor 0 error. 
-classifier = naiveBayes(x = training_set[-3],
-                        y = training_set$Purchased)
+# Fitting Random Forest Classification to the Training set
+# install.packages('randomForest')
+library(randomForest)
+set.seed(123)
+classifier = randomForest(x = training_set[-3],
+                          y = training_set$Purchased,
+                          ntree = 500)
 
+# Predicting the Test set results
 y_pred = predict(classifier, newdata = test_set[-3])
 
 # Making the Confusion Matrix
@@ -41,9 +40,9 @@ X1 = seq(min(set[, 1]) - 1, max(set[, 1]) + 1, by = 0.01)
 X2 = seq(min(set[, 2]) - 1, max(set[, 2]) + 1, by = 0.01)
 grid_set = expand.grid(X1, X2)
 colnames(grid_set) = c('Age', 'EstimatedSalary')
-y_grid = predict(classifier, newdata = grid_set)
+y_grid = predict(classifier, grid_set)
 plot(set[, -3],
-     main = 'SVM (Training set)',
+     main = 'Random Forest Classification (Training set)',
      xlab = 'Age', ylab = 'Estimated Salary',
      xlim = range(X1), ylim = range(X2))
 contour(X1, X2, matrix(as.numeric(y_grid), length(X1), length(X2)), add = TRUE)
@@ -57,10 +56,13 @@ X1 = seq(min(set[, 1]) - 1, max(set[, 1]) + 1, by = 0.01)
 X2 = seq(min(set[, 2]) - 1, max(set[, 2]) + 1, by = 0.01)
 grid_set = expand.grid(X1, X2)
 colnames(grid_set) = c('Age', 'EstimatedSalary')
-y_grid = predict(classifier, newdata = grid_set)
-plot(set[, -3], main = 'SVM (Test set)',
+y_grid = predict(classifier, grid_set)
+plot(set[, -3], main = 'Random Forest Classification (Test set)',
      xlab = 'Age', ylab = 'Estimated Salary',
      xlim = range(X1), ylim = range(X2))
 contour(X1, X2, matrix(as.numeric(y_grid), length(X1), length(X2)), add = TRUE)
 points(grid_set, pch = '.', col = ifelse(y_grid == 1, 'springgreen3', 'tomato'))
 points(set, pch = 21, bg = ifelse(set[, 3] == 1, 'green4', 'red3'))
+
+# Choosing the number of trees
+plot(classifier)
